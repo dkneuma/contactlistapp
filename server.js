@@ -1,30 +1,58 @@
 var express = require("express");
+var mongojs = require("mongojs");
+var bodyParser = require("body-parser");
+var db = mongojs('contactlist',['contactlist']);
 var app = express();
 
 app.use(express.static('public'));
+app.use(bodyParser.json());
 
 app.get('/contactlist', function (req, res) {
     console.log("I received a GET request");
 
-    var person1 = {
-        name: "Tim",
-        email: "tim@email1.com",
-        number: "(111) 111-1111"
-    };
-    var person2 = {
-        name: "Emily",
-        email: "emily@email2.com",
-        number: "(222) 222-2222"
-    };
-    var person3 = {
-        name: "John",
-        email: "john@email3.com",
-        number: "(333) 333-3333"
-    };
 
-    var contactlist = [person1,person2, person3];
-    res.json(contactlist);
+    db.contactlist.find(function (err, docs) {
+        console.log(docs);
+        res.json(docs);
+
+    });
 });
+
+app.post('/contactlist', function (req, res) {
+    console.log("I received a POST request");
+    console.log(req.body);
+    db.contactlist.insert(req.body, function(err, doc) {
+        res.json(doc);
+    });
+});
+
+app.delete('/contactlist/:id', function (req, res) {
+    var id = req.params.id;
+    console.log(id);
+    db.contactlist.remove({_id: mongojs.ObjectId(id)}, function (err, doc) {
+        res.json(doc);
+     });
+});
+
+app.get('/contactlist/:id', function (req, res) {
+    var id = req.params.id;
+    console.log('Called edit:' + id);
+    db.contactlist.findOne({_id: mongojs.ObjectId(id)}, function (err, doc) {
+        res.json(doc);
+
+    });
+});
+
+app.put('/contactlist/:id', function (req, res) {
+   var id = req.params.id;
+    console.log('Called put:' + req.body.name);
+    db.contactlist.findAndModify({query: {_id: mongojs.ObjectId(id)},
+        update: {$set: {name: req.body.name, email: req.body.email, number: req.body.number}} ,
+        new: true }, function (err, doc) {
+            res.json(doc);
+        });
+});
+
 
 app.listen(3000);
 console.log("Server listening on 3000");
