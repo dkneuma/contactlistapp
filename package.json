@@ -1,0 +1,35 @@
+{
+  "name": "contactlistapp",
+  "version": "1.0.2",
+  "description": "Demo MEAN stack app",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "^1.12.3",
+    "express": "^4.12.3",
+    "mongojs": "^0.18.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "engines" : {
+    "node":"*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dkneuma/contactlistapp.git"
+  },
+  "keywords": [
+    "node",
+    "mongo",
+    "express",
+    "angular"
+  ],
+  "author": "Dan Neumann",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dkneuma/contactlistapp/issues"
+  },
+  "homepage": "https://github.com/dkneuma/contactlistapp"
+}
