@@ -2,7 +2,7 @@ var express = require("express");
 var mongojs = require("mongojs");
 var bodyParser = require("body-parser");
 //var db = mongojs('contactlist',['contactlist']);
-var db = mongojs("mongodb://heroku_app36561229:9psss0in9tp0916934g7g5fag0@ds031922.mongolab.com:31922/heroku_app36561229");
+var db = mongojs(" mongodb://dkneuma:elfyHors3@ds043329.mongolab.com:43329/contactlist");
 var contactlist = db.collection("contactlist");
 var app = express();
 
