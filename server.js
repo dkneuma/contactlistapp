@@ -2,8 +2,8 @@ var express = require("express");
 var mongojs = require("mongojs");
 var bodyParser = require("body-parser");
 //var db = mongojs('contactlist',['contactlist']);
-var db = mongojs(" mongodb://dkneuma:elfyHors3@ds043329.mongolab.com:43329/contactlist");
-var contactlist = db.collection("contactlist");
+var db = mongojs("mongodb://admin:nimda~1@ds043329.mongolab.com:43329/contactlist",['contactlist']);
+//var contactlist = db.collection("contactlist");
 var app = express();
 
 app.use(express.static('public'));
