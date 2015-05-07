@@ -6,8 +6,10 @@ var db = mongojs("mongodb://admin:nimda~1@ds043329.mongolab.com:43329/contactlis
 //var contactlist = db.collection("contactlist");
 var app = express();
 
-app.use(express.static('public'));
+app.use(express.static(__dirname + '/public'));
+//app.use(express.static('public'));
 app.use(bodyParser.json());
+app.set('port', (process.env.PORT || 5000));
 
 app.get('/contactlist', function (req, res) {
     console.log("I received a GET request");
@@ -56,5 +58,6 @@ app.put('/contactlist/:id', function (req, res) {
 });
 
 
-app.listen(3000);
-console.log("Server listening on 3000");
+app.listen(app.get('port'), function() {
+    console.log('Node app is running on port', app.get('port'));
+});
