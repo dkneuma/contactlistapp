@@ -16,9 +16,9 @@
        <table class="table">
            <thead>
                <tr>
-                   <th>Name</th>
-                   <th>Email</th>
-                   <th>Number</th>
+                   <th><a href="" ng-click="predicate = 'Name'; reverse=false">Name</a></th>
+                   <th><a href="" ng-click="predicate = 'Email'; reverse=false">Email</a></th>
+                   <th><a href="" ng-click="predicate = 'Number'; reverse=false">Number</a></th>
                    <th>Action</th>
                    <th>&nbsp;</th>
                </tr>
@@ -33,7 +33,7 @@
                <button class="btn btn-info" ng-click="deselect()">Clear</button></td>
 
            </tr>
-           <tr ng-repeat="contact in contactlist">
+           <tr ng-repeat="contact in contactlist | orderBy:predicate:reverse">
                <td>{{contact.Name}}</td>
                <td>{{contact.Email}}</td>
                <td>{{contact.Number}}</td>
