@@ -12,7 +12,10 @@
 <body>
     <div class="container" ng-controller="AppCtrl">
         <h1>Contact List App</h1>
-
+        <form class="form-inline">
+            <input ng-model="query" type="text"
+                   placeholder="Filter by" autofocus>
+        </form>
        <table class="table">
            <thead>
                <tr>
@@ -33,7 +36,7 @@
                <button class="btn btn-info" ng-click="deselect()">Clear</button></td>
 
            </tr>
-           <tr ng-repeat="contact in contactlist | orderBy:predicate:reverse">
+            <tr ng-repeat="contact in contactlist |filter:query | orderBy:predicate:reverse">
                <td>{{contact.Name}}</td>
                <td>{{contact.Email}}</td>
                <td>{{contact.Number}}</td>

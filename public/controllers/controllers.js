@@ -2,6 +2,7 @@
  * Created by daniel.neumann on 4/27/15.
  */
 var myApp = angular.module('myApp', []);
+
 myApp.controller('AppCtrl', ['$scope', '$http', function($scope, $http) {
     console.log("Hello World from controller");
 
