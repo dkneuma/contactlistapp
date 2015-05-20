@@ -50,28 +50,32 @@ app.post('/contactlist', function (req, res) {
 app.delete('/contactlist/:id', function (req, res) {
     var id = req.params.id;
     console.log(id);
-    db.contactlist.remove({_id: mongojs.ObjectId(id)}, function (err, doc) {
-        res.json(doc);
-     });
+    ContactList.findByIdAndRemove(id, req.body, function(err, post) {
+        if (err) return err;
+        res.json(post);
+    });
+
+
 });
 
 app.get('/contactlist/:id', function (req, res) {
     var id = req.params.id;
     console.log('Called edit:' + id);
-    db.contactlist.findOne({_id: mongojs.ObjectId(id)}, function (err, doc) {
-        res.json(doc);
-
+    ContactList.findById(id, function(err, post) {
+       if (err) return err;
+        res.json(post);
     });
+
 });
 
 app.put('/contactlist/:id', function (req, res) {
    var id = req.params.id;
     console.log('Called put:' + req.body.Name);
-    db.contactlist.findAndModify({query: {_id: mongojs.ObjectId(id)},
-        update: {$set: {Name: req.body.Name, Email: req.body.Email, Number: req.body.Number}} ,
-        new: true }, function (err, doc) {
-            res.json(doc);
-        });
+ContactList.findByIdAndUpdate(id, req.body, function(err, post) {
+    if (err) return err;
+    res.json(post);
+});
+
 });
 
 
